@@ -28,7 +28,8 @@ const addcontact = async (req, res) => {
 };
 
 const getContact = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  let { recordLimit, recordPage } = req.params;
+  const { page = recordPage, limit = recordLimit } = req.query;
   const skip = (page - 1) * limit;
 
   try {
@@ -101,6 +102,28 @@ const getContactByName = async (req, res) => {
   }
 };
 
+const Search = async (req, res) => {
+  try {
+    let searchTerm = req.query.searchTerm; // Extract searchTerm correctly
+
+    if (!searchTerm) {
+      return res.status(400).json({ error: "Search term is required" });
+    }
+
+    let Contacts = await mobileBook.find({
+      $or: [
+        { mobileNumber: { $regex: searchTerm, $options: "i" } },
+        { fullName: { $regex: searchTerm, $options: "i" } },
+      ],
+    });
+
+    res.json(Contacts);
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
+  }
+};
+
 const updateContact = async (req, res) => {
   const id = req.params.id;
   const updateData = req.body;
@@ -137,4 +160,5 @@ module.exports = {
   deleteContact,
   getContactByMobile,
   getContactByName,
+  Search,
 };

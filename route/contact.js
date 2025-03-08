@@ -7,6 +7,7 @@ const {
   deleteContact,
   getContactByMobile,
   getContactByName,
+  Search,
 } = require("../controller/contact");
 
 let route = express.Router();
@@ -18,5 +19,6 @@ route.get(`/getContactById/:id`, getContactById);
 route.delete(`/deleteContact/:id`, deleteContact);
 route.get(`/getContactMobileNumber/:mobileNumber`, getContactByMobile);
 route.get("/getContactByName/:fullName", getContactByName);
+route.get("/Search", Search);
 
 module.exports = route;
