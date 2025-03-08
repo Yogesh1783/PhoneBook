@@ -23,7 +23,7 @@ const addcontact = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({ error: error });
+    res.status(500).send({ error });
   }
 };
 
@@ -48,7 +48,7 @@ const getContact = async (req, res) => {
     });
   } catch (error) {
     console.log("Error while fetching data", error);
-    res.status(500).send("Server Error");
+    res.status(500).send({ error });
   }
 };
 
@@ -60,7 +60,7 @@ const getContactById = async (req, res) => {
     res.json(Contact);
   } catch (error) {
     console.log("Error while fetching single contact");
-    res.status(404).send(`Server Errror`);
+    res.status(404).send({ error });
   }
 };
 
@@ -72,13 +72,13 @@ const getContactByMobile = async (req, res) => {
     if (contact) {
       res.status(200).json(contact);
     } else {
-      res.status(404).json({ message: "Contact not found" });
+      res.status(404).json({ error });
     }
 
     res.json(contact);
   } catch (error) {
     console.log("Error while fetching single contact");
-    res.status(500).send("Server Error");
+    res.status(500).send(error);
   }
 };
 
@@ -97,9 +97,7 @@ const getContactByName = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({ message: "An error occurred while retrieving the contact" });
+    res.status(500).json({ error });
   }
 };
 
@@ -116,7 +114,7 @@ const updateContact = async (req, res) => {
     res.json(personContactInfo);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Unable to update contact" });
+    res.status(500).json({ error });
   }
 };
 
@@ -127,7 +125,7 @@ const deleteContact = async (req, res) => {
     res.json(deleted);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Unable to delete contact" });
+    res.status(500).json({ error });
   }
 };
 
