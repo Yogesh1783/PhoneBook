@@ -2,6 +2,8 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const Contact = require("./route/contact");
 
+const env = require("dotenv").config();
+
 let app = express();
 
 let port = 8000;
@@ -9,10 +11,7 @@ let port = 8000;
 app.use(express.json());
 
 mongoose
-  .connect("mongodb://localhost:27017/ContactBook", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.DATABASE_URL)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Could not connect to MongoDB...", err));
 

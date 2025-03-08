@@ -19,11 +19,11 @@ const addcontact = async (req, res) => {
         mobileNumber,
         email,
       });
-      res.json({ message: "Added contact Successfully" });
+      res.json(contact);
     }
   } catch (error) {
-    console.log("Error while creating Contact");
-    res.status(500).send(`Server Error`);
+    console.log(error);
+    res.status(500).send({ error: error });
   }
 };
 

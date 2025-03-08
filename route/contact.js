@@ -12,7 +12,7 @@ const {
 let route = express.Router();
 
 route.post("/addContact", addcontact);
-route.get("/getContact", getContact);
+route.get("/getContacts", getContact);
 route.put(`/updateContact/:id`, updateContact);
 route.get(`/getContactById/:id`, getContactById);
 route.delete(`/deleteContact/:id`, deleteContact);
