@@ -28,8 +28,8 @@ const addcontact = async (req, res) => {
 };
 
 const getContacts = async (req, res) => {
-  let { recordLimit, recordPage } = req.params;
-  const { page = recordPage, limit = recordLimit } = req.query;
+  let { recordLimit, recordPage } = req.query;
+  const { page = recordPage, limit = recordLimit } = req.params;
   const skip = (page - 1) * limit;
 
   try {
@@ -104,9 +104,10 @@ const getContactByName = async (req, res) => {
 
 const Search = async (req, res) => {
   try {
-    let { recordLimit, recordPage } = req.params;
-    const { page = recordPage, limit = recordLimit } = req.query;
+    let { recordLimit, recordPage } = req.query;
+    const { page = recordPage, limit = recordLimit } = req.params;
     const skip = (page - 1) * limit;
+
     let keyword = req.query.keyword;
 
     if (!keyword) {
